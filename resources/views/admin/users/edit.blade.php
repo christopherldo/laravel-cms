@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Novo usuário')
+@section('title', 'Editar usuário')
 
 @section('content')
     @if ($errors->any())
@@ -19,17 +19,17 @@
 
     <div class="card">
         <div class="card-header">
-            <h4>Novo usuário</h4>
+            <h4>Editar usuário</h4>
         </div>
         <div class="card-body">
-            <form action="{{ route('users.store') }}" class="form-horizontal" method="POST">
-                @csrf
+            <form action="{{ route('users.update', ['user' => $user->id]) }}" class="form-horizontal" method="POST">
+                @csrf @method('PUT')
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">
                         Nome completo:
                     </label>
                     <div class="col-sm-10">
-                        <input type="text" name="name" value="{{ old('name') }}"
+                        <input type="text" name="name" value="{{ $user->name }}"
                             class="form-control @error('name') is-invalid @enderror" id="name">
                     </div>
                 </div>
@@ -38,13 +38,13 @@
                         Email:
                     </label>
                     <div class="col-sm-10">
-                        <input type="email" name="email" value="{{ old('email') }}"
+                        <input type="email" name="email" value="{{ $user->email }}"
                             class="form-control @error('email') is-invalid @enderror" id="email">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="password" class="col-sm-2 col-form-label">
-                        Senha:
+                        Nova senha:
                     </label>
                     <div class="col-sm-10">
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
@@ -63,7 +63,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
-                        <input type="submit" value="Cadastrar" class="btn btn-success">
+                        <input type="submit" value="Salvar" class="btn btn-success">
                     </div>
                 </div>
             </form>
