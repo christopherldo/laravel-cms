@@ -9,9 +9,16 @@ use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:edit-users');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +27,11 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(10);
+        $loggedId = intval(Auth::id());
 
         return view('admin.users.index', [
             'users' => $users,
+            'loggedId' => $loggedId
         ]);
     }
 
@@ -143,11 +152,18 @@ class UserController extends Controller
 
             if (empty($data['password']) === false) {
                 if (strlen($data['password']) >= 8) {
-                    if ($data['password'] === $data['password_confirmation']) {
-                        $user->password = Hash::make($data['password']);
+                    if(strlen($data['password']) <= 100){
+                        if ($data['password'] === $data['password_confirmation']) {
+                            $user->password = Hash::make($data['password']);
+                        } else {
+                            $validator->errors()->add('password', __('validation.confirmed', [
+                                'attribute' => 'senha',
+                            ]));
+                        };
                     } else {
-                        $validator->errors()->add('password', __('validation.confirmed', [
+                        $validator->errors()->add('password', __('validation.max.string', [
                             'attribute' => 'senha',
+                            'max' => 100,
                         ]));
                     };
                 } else {

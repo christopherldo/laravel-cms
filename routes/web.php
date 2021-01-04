@@ -30,4 +30,7 @@ Route::prefix('painel')->group(function(){
     Route::post('logout', [Admin\Auth\LoginController::class, 'logout']);
 
     Route::resource('users', Admin\UserController::class);
+
+    Route::get('profile', [Admin\ProfileController::class, 'index'])->name('profile');
+    Route::put('profile/save', [Admin\ProfileController::class, 'save'])->name('profile.save');
 });

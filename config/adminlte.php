@@ -238,17 +238,23 @@ return [
             'text'        => 'Meus usuários',
             'url'         => 'painel/users',
             'icon'        => 'far fa-fw fa-file',
+            'can'         => 'edit-users'
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'Configurações'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text'        => 'Configurações do Site',
+            'url'         => 'painel/settings',
+            'icon'        => 'far fa-fw fa-file'
         ],
         [
-            'text' => 'Sair',
-            'url' => 'painel/logout',
-            'icon' => 'fa fa-fw fa-power-off',
+            'text'        => 'Meu Perfil',
+            'url'         => 'painel/profile',
+            'icon'        => 'far fa-fw fa-user'
+        ],
+        [
+            'text'        => 'Sair',
+            'url'         => 'painel/logout',
+            'icon'        => 'fa fa-fw fa-power-off',
         ]
     ],
 
