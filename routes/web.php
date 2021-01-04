@@ -33,4 +33,7 @@ Route::prefix('painel')->group(function(){
 
     Route::get('profile', [Admin\ProfileController::class, 'index'])->name('profile');
     Route::put('profile/save', [Admin\ProfileController::class, 'save'])->name('profile.save');
+
+    Route::get('settings', [Admin\SettingController::class, 'index'])->name('settings');
+    Route::put('settings/save', [Admin\SettingController::class, 'save'])->name('settings.save');
 });
