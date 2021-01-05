@@ -61,7 +61,7 @@
                     </label>
                     <div class="col-sm-10">
                         <input type="color" name="bgcolor" id="bgcolor" value="{{ $settings['bgcolor'] }}"
-                            class="form-control">
+                            class="form-control" style="max-width: 68px">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -70,7 +70,7 @@
                     </label>
                     <div class="col-sm-10">
                         <input type="color" name="textcolor" id="textcolor" value="{{ $settings['textcolor'] }}"
-                            class="form-control">
+                            class="form-control" style="max-width: 68px">
                     </div>
                 </div>
                 <div class="form-group row">
