@@ -62,8 +62,7 @@
             content_css: [
                 '{{ asset(' / css / content.css ') }}'
             ],
-            images_upload_url: '{{ route('
-            imageupload ') }}',
+            images_upload_url: '{{ route('imageupload') }}',
             images_upload_credentials: true,
             convert_urls: false
         });
