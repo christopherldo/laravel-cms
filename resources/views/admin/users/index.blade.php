@@ -32,8 +32,7 @@
                                     class="btn btn-sm btn-info">Editar</a>
                                 @if ($loggedId !== intval($user->id))
                                     <form method="POST" action="{{ route('users.destroy', ['user' => $user->id]) }}"
-                                        class="d-inline"
-                                        onsubmit="return confirm('Deseja realmente excluir esse usuário?')">
+                                        class="d-inline deletion-form">
                                         @csrf @method('DELETE')
                                         <button class="btn btn-sm btn-danger">Excluir</button>
                                     </form>
@@ -47,4 +46,27 @@
         </div>
     </div>
     {{ $users->links('pagination::bootstrap-4') }}
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        let deletionForm = document.querySelector('.deletion-form');
+
+        if (deletionForm) {
+            deletionForm.addEventListener('submit', event => {
+                event.preventDefault();
+                swal({
+                    title: "Deseja excluir esse usuário?",
+                    text: "Isso não pode ser desfeito",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then(confirmation => {
+                    if(confirmation){
+                        deletionForm.submit();
+                    };
+                });
+            });
+        };
+
+    </script>
 @endsection

@@ -48,32 +48,6 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="email" class="col-sm-2 col-form-label">
-                        E-mail para contato:
-                    </label>
-                    <div class="col-sm-10">
-                        <input type="email" name="email" id="email" value="{{ $settings['email'] }}" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="bgcolor" class="col-sm-2 col-form-label">
-                        Cor do fundo:
-                    </label>
-                    <div class="col-sm-10">
-                        <input type="color" name="bgcolor" id="bgcolor" value="{{ $settings['bgcolor'] }}"
-                            class="form-control" style="max-width: 68px">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="textcolor" class="col-sm-2 col-form-label">
-                        Cor do texto:
-                    </label>
-                    <div class="col-sm-10">
-                        <input type="color" name="textcolor" id="textcolor" value="{{ $settings['textcolor'] }}"
-                            class="form-control" style="max-width: 68px">
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
                         <input type="submit" value="Salvar" class="btn btn-success">

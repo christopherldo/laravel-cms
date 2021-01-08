@@ -43,19 +43,17 @@
                         <div class="main-menu  d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
-                                    @if(isset($front_menu))
                                     @foreach($front_menu as $menuslug => $menutitle)
                                     <li>
                                         <a href="{{$menuslug}}">{{$menutitle}}</a>
                                     </li>
                                     @endforeach
-                                    @endif
                                 </ul>
                             </nav>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 d-none d-lg-block">
-                        
+
                     </div>
                     <div class="col-12">
                         <div class="mobile_menu d-block d-lg-none"></div>
@@ -85,26 +83,6 @@
                         <p>
                             {{$front_config['subtitle'] ?? ''}}
                         </p>
-                        <div class="socail_links">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-twitter-alt"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-instagram"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
                     </div>
                 </div>
                 <div class="col-xl-2 offset-xl-1 col-md-6 col-lg-3">
@@ -113,34 +91,13 @@
                                 Menu
                         </h3>
                         <ul>
-                            @if(isset($front_menu))
                             @foreach($front_menu as $menuslug => $menutitle)
                             <li>
                                 <a href="{{$menuslug}}">{{$menutitle}}</a>
                             </li>
                             @endforeach
-                            @endif
                         </ul>
 
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6 col-lg-3">
-                    <div class="footer_widget">
-                        <h3 class="footer_title">
-                                Downloads
-                        </h3>
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    Download from Apple Store
-
-                                </a>
-                            </li>
-                            <li><a href="#">
-                                    Download from Play Store
-                                </a>
-                            </li>
-                            </ul>
                     </div>
                 </div>
             </div>

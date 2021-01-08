@@ -112,6 +112,7 @@
     </div>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script>
         window.onload = function() {
             let ctx = document.getElementById('pagePie').getContext('2d');
@@ -146,7 +147,7 @@
                     icon: "info",
                     buttons: true,
                     dangerMode: false,
-                }).then((confirmation) => {
+                }).then(confirmation => {
                     if(confirmation){
                         dateFilterForm.submit();
                     } else {

@@ -34,9 +34,6 @@ class SettingController extends Controller
         $data = $request->only([
             'title',
             'subtitle',
-            'email',
-            'bgcolor',
-            'textcolor'
         ]);
 
         $validator = $this->validator($data);
@@ -61,9 +58,6 @@ class SettingController extends Controller
         return Validator::make($data, [
             'title' => ['string', 'max:100'],
             'subtitle' => ['string', 'max:100'],
-            'email' => ['string', 'email', 'max:100'],
-            'bgcolor' => ['string', 'max:7', 'regex:/#[a-zA-Z0-9]{6}/i'],
-            'textcolor' => ['string', 'max:7', 'regex:/#[a-zA-Z0-9]{6}/i']
         ]);
     }
 }
