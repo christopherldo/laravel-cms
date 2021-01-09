@@ -238,13 +238,14 @@ return [
             'text'        => 'Meus usuários',
             'url'         => 'painel/users',
             'icon'        => 'far fa-fw fa-file',
-            'can'         => 'edit-users'
+            'can'         => 'admin'
         ],
         ['header' => 'Configurações'],
         [
             'text'        => 'Configurações do Site',
             'url'         => 'painel/settings',
-            'icon'        => 'far fa-fw fa-file'
+            'icon'        => 'far fa-fw fa-file',
+            'can'         => 'admin'
         ],
         [
             'text'        => 'Meu Perfil',

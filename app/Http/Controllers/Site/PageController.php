@@ -11,15 +11,24 @@ class PageController extends Controller
 {
     public function index(Request $request, $slug)
     {
-        $visitor = new Visitor;
-        $visitor->ip = $request->ip();
-        $visitor->date_access = date('Y-m-d H:i:s');
-        $visitor->page = '/' . $slug;
-        $visitor->save();
+        $pages = Page::all();
+        $pagesSlug = [];
+
+        foreach ($pages as $page) {
+            array_push($pagesSlug, $page->slug);
+        };
+
+        if (in_array($slug, $pagesSlug)) {
+            $visitor = new Visitor;
+            $visitor->ip = $request->ip();
+            $visitor->date_access = date('Y-m-d H:i:s');
+            $visitor->page = '/' . $slug;
+            $visitor->save();
+        };
 
         $page = Page::where('slug', $slug)->first();
 
-        if($page){
+        if ($page) {
             return view('site.page', [
                 'page' => $page
             ]);

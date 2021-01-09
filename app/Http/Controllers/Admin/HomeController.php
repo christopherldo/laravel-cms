@@ -64,7 +64,7 @@ class HomeController extends Controller
             'pageLabels' => $pageLabels,
             'pageValues' => $pageValues,
             'pageColors' => $pageColors,
-            'filterDate' => $filterDate
+            'filterDate' => $filterDate,
         ]);
     }
 

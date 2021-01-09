@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Models\Page;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -22,10 +24,14 @@ class PageController extends Controller
      */
     public function index()
     {
+        $loggedId = Auth::id();
+        $user = User::find($loggedId);
+
         $pages = Page::paginate(10);
 
         return view('admin.pages.index', [
             'pages' => $pages,
+            'user' => $user
         ]);
     }
 
@@ -63,8 +69,9 @@ class PageController extends Controller
 
         $page = new Page;
         $page->title = $data['title'];
-        $page->body = $data['body'];
         $page->slug = $data['slug'];
+        $page->body = $data['body'];
+        $page->created_by = Auth::id();
         $page->save();
 
         return redirect()->route('pages.index');
@@ -89,9 +96,12 @@ class PageController extends Controller
      */
     public function edit($id)
     {
+        $loggedId = Auth::id();
+        $user = User::find($loggedId);
+
         $page = Page::find($id);
 
-        if ($page) {
+        if ($page && ($loggedId === $page->created_by || $user->admin === 1)) {
             return view('admin.pages.edit', [
                 'page' => $page
             ]);
@@ -109,9 +119,12 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $loggedId = Auth::id();
+        $user = User::find($loggedId);
+
         $page = Page::find($id);
 
-        if ($page) {
+        if ($page && ($loggedId === $page->created_by || $user->admin === 1)) {
             $data = $request->only(['title', 'body']);
 
             if ($page->title !== $data['title']) {
@@ -155,8 +168,14 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
+        $loggedId = Auth::id();
+        $user = User::find($loggedId);
+
         $page = Page::find($id);
-        $page->delete();
+
+        if($loggedId === $page->created_by || $user->admin === 1){
+            $page->delete();
+        };
 
         return redirect()->route('pages.index');
     }

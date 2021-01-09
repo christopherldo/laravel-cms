@@ -25,13 +25,15 @@
                             <td>{{ $page->title }}</td>
                             <td>
                                 <a href="/{{$page->slug}}" target="_blank" class="btn btn-sm btn-success">Ver</a>
-                                <a href="{{ route('pages.edit', ['page' => $page->id]) }}"
-                                    class="btn btn-sm btn-info">Editar</a>
-                                <form method="POST" action="{{ route('pages.destroy', ['page' => $page->id]) }}"
-                                    class="d-inline deletion-form">
-                                    @csrf @method('DELETE')
-                                    <button class="btn btn-sm btn-danger">Excluir</button>
-                                </form>
+                                @if($user->id === $page->created_by || $user->admin === 1)
+                                    <a href="{{ route('pages.edit', ['page' => $page->id]) }}"
+                                        class="btn btn-sm btn-info">Editar</a>
+                                    <form method="POST" action="{{ route('pages.destroy', ['page' => $page->id]) }}"
+                                        class="d-inline deletion-form">
+                                        @csrf @method('DELETE')
+                                        <button class="btn btn-sm btn-danger">Excluir</button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

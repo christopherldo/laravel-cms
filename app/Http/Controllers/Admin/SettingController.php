@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Setting;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
 {
@@ -16,17 +18,24 @@ class SettingController extends Controller
 
     public function index()
     {
-        $settings = [];
+        $loggedId = Auth::id();
+        $user = User::find($loggedId);
 
-        $data = Setting::get();
+        if ($user->admin === 1) {
+            $settings = [];
 
-        foreach ($data as $item) {
-            $settings[$item['name']] = $item['content'];
-        };
+            $data = Setting::get();
 
-        return view('admin.settings.index', [
-            'settings' => $settings
-        ]);
+            foreach ($data as $item) {
+                $settings[$item['name']] = $item['content'];
+            };
+
+            return view('admin.settings.index', [
+                'settings' => $settings
+            ]);
+        }
+
+        return redirect()->route('admin');
     }
 
     public function save(Request $request)
@@ -38,18 +47,19 @@ class SettingController extends Controller
 
         $validator = $this->validator($data);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->route('settings')->withErrors($validator);
         };
 
-        foreach($data as $item => $value){
+        foreach ($data as $item => $value) {
             Setting::where('name', $item)->update([
                 'content' => $value
             ]);
         };
 
         return redirect()->route('settings')->with(
-            'warning', 'Informações alteradas com sucesso!'
+            'warning',
+            'Informações alteradas com sucesso!'
         );
     }
 

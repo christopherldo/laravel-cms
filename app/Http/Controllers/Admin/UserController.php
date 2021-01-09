@@ -16,7 +16,6 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('can:edit-users');
     }
 
     /**
@@ -26,13 +25,19 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
         $loggedId = intval(Auth::id());
+        $user = User::find($loggedId);
 
-        return view('admin.users.index', [
-            'users' => $users,
-            'loggedId' => $loggedId
-        ]);
+        if($user->admin === 1){
+            $users = User::paginate(10);
+
+            return view('admin.users.index', [
+                'users' => $users,
+                'loggedId' => $loggedId
+            ]);
+        };
+
+        return redirect()->route('admin');
     }
 
     /**
